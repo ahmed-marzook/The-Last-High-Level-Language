@@ -1,5 +1,5 @@
 import Footer from "../components/Footer/Footer";
-import Header from "../components/header/Header";
+import Header from "../components/Header/Header";
 import Keyboard from "../components/Keyboard/Keyboard";
 import LivesDisplay from "../components/LivesDisplay/LivesDisplay";
 import UserAnswers from "../components/WordGrid/WordGrid";
