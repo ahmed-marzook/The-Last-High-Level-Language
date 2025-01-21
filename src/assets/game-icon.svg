@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background Terminal Window -->
+  <rect x="20" y="20" width="160" height="160" rx="10" fill="#1a1a1a"/>
+  <rect x="20" y="20" width="160" height="30" rx="10" fill="#333333"/>
+  
+  <!-- Terminal Buttons -->
+  <circle cx="40" cy="35" r="5" fill="#ff5f57"/>
+  <circle cx="60" cy="35" r="5" fill="#febc2e"/>
+  <circle cx="80" cy="35" r="5" fill="#28c941"/>
+  
+  <!-- Assembly Code-like Lines -->
+  <g fill="none" stroke="#00ff00" stroke-width="2" opacity="0.6">
+    <line x1="35" y1="70" x2="165" y2="70"/>
+    <line x1="35" y1="90" x2="140" y2="90"/>
+    <line x1="35" y1="110" x2="155" y2="110"/>
+  </g>
+  
+  <!-- Binary Rain Effect -->
+  <g fill="#00ff00" font-family="monospace" font-size="10" opacity="0.4">
+    <text x="40" y="80">01</text>
+    <text x="120" y="100">10</text>
+    <text x="80" y="120">11</text>
+    <text x="150" y="85">00</text>
+  </g>
+  
+  <!-- Hangman's Noose as Circuit -->
+  <path d="M100 50 L100 90 L120 90" 
+        fill="none" 
+        stroke="#ff3366" 
+        stroke-width="3"
+        stroke-linecap="round"/>
+  
+  <!-- Assembly Mnemonic -->
+  <text x="45" y="150" 
+        fill="#ff3366" 
+        font-family="monospace" 
+        font-size="14" 
+        font-weight="bold">MOV LIFE, NULL</text>
+  
+  <!-- Warning Symbol -->
+  <path d="M180 35 L175 45 L185 45 Z" 
+        fill="#febc2e" 
+        stroke="#febc2e" 
+        stroke-width="1"/>
+</svg>
