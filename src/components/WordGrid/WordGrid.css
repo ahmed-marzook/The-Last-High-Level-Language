@@ -1,0 +1,20 @@
+/* User Answer Grid */
+.word-grid {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 2px;
+  margin-top: 36px;
+}
+
+.word-grid__letter {
+  height: 40px;
+  width: 40px;
+  padding: 6px;
+  border-bottom: 1px solid #f9f4da;
+  background-color: #323232;
+  text-align: center;
+  align-content: center;
+  font-weight: 700;
+  color: #f9f4da;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,16 @@
+/* Footer */
+footer {
+  width: 320px;
+  font-family: var(--font-primary);
+  font-size: 12px;
+  color: silver;
+  margin: 0.5rem auto;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+footer a {
+  text-decoration: none;
+  font-style: italic;
+  color: #7dd3fc;
+}

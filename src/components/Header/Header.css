@@ -1,0 +1,12 @@
+.game-header {
+  text-align: center;
+}
+
+.game-header .game-title {
+  color: #f9f4da;
+}
+
+.game-header .game-instructions {
+  color: #8e8e8e;
+  font-weight: 500;
+}
