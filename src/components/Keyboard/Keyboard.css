@@ -31,7 +31,7 @@
   font-family: inherit;
   font-weight: 600;
   font-size: 0.875rem;
-  border: none;
+  border: 1px solid #d7d7d7;
   padding: 0;
   transition: transform 0.1s ease, background-color 0.2s ease; /* Added transition */
 }
@@ -48,6 +48,14 @@
 .key:focus {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
+}
+
+.key.wrong {
+  background-color: #ec5d49;
+}
+
+.key.correct {
+  background-color: #10a95b;
 }
 
 @media (min-width: 40rem) {
