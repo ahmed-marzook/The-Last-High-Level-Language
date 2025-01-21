@@ -2,6 +2,7 @@
   "name": "the-last-high-level-language-learning-react",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://lastlang.kaizenflow.dev/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
