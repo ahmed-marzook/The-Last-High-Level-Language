@@ -5,10 +5,31 @@ import LivesLanguage from "../LivesLanguage/LivesLanguage";
 import Notice from "../Notice/Notice";
 
 function LivesDisplay({ attemptsLeft, gameStatus }) {
-  function getMessage() {
-    // If we have all attempts (8), return empty string
+  const gameStateDisplay = (() => {
+    switch (gameStatus) {
+      case "won":
+        return {
+          message: "YOU WIN! Well Done!",
+          backgroundColor: "#4CAF50",
+          textColor: "#FFFFFF",
+        };
+      case "gameOver":
+        return {
+          message:
+            "Game over! All languages reduced to Assembly. Better start learning Assembly",
+          backgroundColor: "#F44336",
+          textColor: "#FFFFFF",
+        };
+    }
+
+    // If game is still in progress, handle lives display
+    // If we have all attempts (8), return empty message object
     if (attemptsLeft + 1 > 8) {
-      return "";
+      return {
+        message: "",
+        backgroundColor: "",
+        textColor: "",
+      };
     }
 
     // Find the first language that matches our current attempts count
@@ -16,21 +37,25 @@ function LivesDisplay({ attemptsLeft, gameStatus }) {
       (lang) => lang.attempts === attemptsLeft + 1
     );
 
-    // If we found a matching language, return its message
+    // If we found a matching language, return it
     if (language) {
       return language;
     }
 
     // If no matching language found (shouldn't happen with your data)
-    return "";
-  }
+    return {
+      message: "",
+      backgroundColor: "",
+      textColor: "",
+    };
+  })();
 
   return (
     <>
       <Notice
-        message={getMessage().message}
-        backgroundColor={getMessage().backgroundColor}
-        textColor={getMessage().textColor}
+        message={gameStateDisplay.message}
+        backgroundColor={gameStateDisplay.backgroundColor}
+        textColor={gameStateDisplay.textColor}
         gameStatus={gameStatus}
       />
       <section className="lives-display">
