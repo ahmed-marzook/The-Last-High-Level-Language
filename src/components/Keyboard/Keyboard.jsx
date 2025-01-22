@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import "./Keyboard.css";
 import KeyboardKey from "../KeyboardKey/KeyboardKey";
@@ -24,6 +23,17 @@ function Keyboard(props) {
   );
 }
 
-Keyboard.propTypes = {};
+Keyboard.propTypes = {
+  keyboardLayout: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        status: PropTypes.string.isRequired,
+      })
+    )
+  ).isRequired,
+  gameStatus: PropTypes.string.isRequired,
+  onKeyPressed: PropTypes.func.isRequired,
+};
 
 export default Keyboard;

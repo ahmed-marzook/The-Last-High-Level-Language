@@ -38,6 +38,16 @@
   background-color: #10a95b;
 }
 
+.key.hint-key {
+  background-color: #90ee90;
+  width: 3rem;
+}
+
+.key.restart-key {
+  background-color: #9090ee;
+  width: 3rem;
+}
+
 @media (min-width: 40rem) {
   .key {
     width: 2.5rem;

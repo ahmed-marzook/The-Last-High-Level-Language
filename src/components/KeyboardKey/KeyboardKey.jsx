@@ -12,13 +12,24 @@ const KeyboardKey = (props) => {
   const isDisabled =
     props.status === "correct" ||
     props.status === "incorrect" ||
-    props.status === "gameOver";
+    (props.status === "gameOver" &&
+      props.letter !== "HINT" &&
+      props.letter !== "⟳");
+
+  const getKeyStyle = () => {
+    if (props.letter === "HINT") {
+      return `key hint-key`;
+    } else if (props.letter === "⟳") {
+      return `key restart-key`;
+    }
+    return `key ${statusClass}`;
+  };
 
   return (
     <button
       disabled={isDisabled}
       onClick={() => props.onKeyPressed(props.letter)}
-      className={`key ${statusClass}`}
+      className={getKeyStyle()}
     >
       {props.letter}
     </button>

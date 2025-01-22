@@ -29,6 +29,14 @@ export default function GamePage() {
 
   const wordSet = new Set(word.toUpperCase());
 
+  function newGame() {
+    setWord(generateSlug(1, options).toUpperCase());
+    setKeyboard(keyboardLayout);
+    setGuessedLetters(new Set([]));
+    setRemainingAttempts(8);
+    setGameStatus("playing");
+  }
+
   const updateKeyboard = (layout, targetKey, newStatus) => {
     return layout.map((row) =>
       row.map((key) =>
@@ -38,6 +46,12 @@ export default function GamePage() {
   };
 
   function keyPressed(letter) {
+    if (letter === "HINT") {
+      console.log("HINT");
+    } else if (letter === "⟳") {
+      return newGame();
+    }
+
     const upperKey = letter.toUpperCase();
 
     setKeyboard((prevKeyboard) => {
