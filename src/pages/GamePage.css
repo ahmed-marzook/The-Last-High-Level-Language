@@ -6,3 +6,24 @@
   justify-content: center;
   max-width: 460px;
 }
+
+/* Hint */
+.hint-container {
+  background-color: #1a1d24;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-top: 10px;
+  max-width: 200px;
+}
+
+.hint-text {
+  color: #d1d5db;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.hint-category {
+  color: #fbbf24;
+  font-weight: 700;
+}

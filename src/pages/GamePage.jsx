@@ -35,6 +35,7 @@ export default function GamePage() {
   const [guessedLetters, setGuessedLetters] = useState(new Set([]));
   const [remainingAttempts, setRemainingAttempts] = useState(8);
   const [gameStatus, setGameStatus] = useState("playing");
+  const [showHint, setShowHint] = useState(false);
 
   const wordSet = new Set(word.toUpperCase());
 
@@ -57,7 +58,7 @@ export default function GamePage() {
 
   function keyPressed(letter) {
     if (letter === "HINT") {
-      console.log(hint);
+      setShowHint(true);
       return;
     } else if (letter === "⟳") {
       return newGame();
@@ -97,6 +98,13 @@ export default function GamePage() {
         guessedLetters={guessedLetters}
         gameStatus={gameStatus}
       />
+      {showHint && (
+        <div className="hint-container">
+          <p className="hint-text">
+            Category: <span className="hint-category">{hint}</span>
+          </p>
+        </div>
+      )}
       <Keyboard
         keyboardLayout={keyboard}
         onKeyPressed={keyPressed}
