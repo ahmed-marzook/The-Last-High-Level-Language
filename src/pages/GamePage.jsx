@@ -40,6 +40,7 @@ export default function GamePage() {
   const wordSet = new Set(word.toUpperCase());
 
   function newGame() {
+    setShowHint(false);
     hint = getRandomCategory();
     setWord(generateSlug(1, getOptions()).toUpperCase());
     setKeyboard(keyboardLayout);
@@ -58,7 +59,7 @@ export default function GamePage() {
 
   function keyPressed(letter) {
     if (letter === "HINT") {
-      setShowHint(true);
+      setShowHint((prev) => !prev);
       return;
     } else if (letter === "⟳") {
       return newGame();
