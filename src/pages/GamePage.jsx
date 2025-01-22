@@ -6,11 +6,23 @@ import WordGrid from "../components/WordGrid/WordGrid";
 import "./GamePage.css";
 import { keyboardLayout } from "../data/keyboardLayout";
 import { useState } from "react";
+import { generateSlug } from "random-word-slugs";
+
+const options = {
+  format: "camel",
+  partsOfSpeech: ["noun"],
+  categories: {
+    noun: ["animals"],
+  },
+};
 
 export default function GamePage() {
   const [keyboard, setKeyboard] = useState(keyboardLayout);
 
-  const [word, setWord] = useState("ORANGE");
+  const [word, setWord] = useState(() =>
+    generateSlug(1, options).toUpperCase()
+  );
+  // const [word, setWord] = useState("ORANGE");
   const [guessedLetters, setGuessedLetters] = useState(new Set([]));
   const [remainingAttempts, setRemainingAttempts] = useState(8);
   const [gameStatus, setGameStatus] = useState("playing");
@@ -26,19 +38,29 @@ export default function GamePage() {
   };
 
   function keyPressed(key) {
+    const upperKey = key.toUpperCase();
+
     setKeyboard((prevKeyboard) => {
-      if (wordSet.has(key.toUpperCase())) {
-        setGuessedLetters((prev) => prev.add(key));
+      if (wordSet.has(upperKey)) {
+        setGuessedLetters((prevGuessedLetters) => {
+          const newGuessedLetters = new Set(prevGuessedLetters).add(upperKey);
+          if (newGuessedLetters.size === wordSet.size) {
+            setGameStatus("won");
+          }
+          return newGuessedLetters;
+        });
         return updateKeyboard(prevKeyboard, key, "correct");
       } else {
-        setRemainingAttempts(remainingAttempts - 1);
+        setRemainingAttempts(() => {
+          const newAttempts = remainingAttempts - 1;
+          if (newAttempts < 1) {
+            setGameStatus("gameOver");
+          }
+          return newAttempts;
+        });
         return updateKeyboard(prevKeyboard, key, "incorrect");
       }
     });
-    if (remainingAttempts < 1) {
-      console.log("YOU LOSE");
-      setGameStatus("gameOver");
-    }
   }
   return (
     <div className="game-content">
