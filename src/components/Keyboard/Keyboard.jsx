@@ -12,7 +12,9 @@ function Keyboard(props) {
             <KeyboardKey
               key={keyData.key}
               letter={keyData.key}
-              status={keyData.status}
+              status={
+                props.gameStatus === "playing" ? keyData.status : "gameOver"
+              }
               onKeyPressed={props.onKeyPressed}
             />
           ))}

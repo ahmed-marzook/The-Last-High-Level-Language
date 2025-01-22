@@ -8,7 +8,10 @@ const KeyboardKey = (props) => {
     unused: "",
   }[props.status || "unused"];
 
-  const isDisabled = props.status === "correct" || props.status === "incorrect";
+  const isDisabled =
+    props.status === "correct" ||
+    props.status === "incorrect" ||
+    props.status === "gameOver";
 
   return (
     <button
@@ -23,7 +26,7 @@ const KeyboardKey = (props) => {
 
 KeyboardKey.propTypes = {
   letter: PropTypes.string.isRequired,
-  status: PropTypes.oneOf(["correct", "incorrect", "unused"]),
+  status: PropTypes.oneOf(["correct", "incorrect", "unused", "gameOver"]),
   onKeyPressed: PropTypes.func.isRequired,
 };
 
