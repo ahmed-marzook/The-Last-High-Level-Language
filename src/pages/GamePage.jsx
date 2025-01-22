@@ -7,6 +7,7 @@ import "./GamePage.css";
 import { keyboardLayout } from "../data/keyboardLayout";
 import { useState } from "react";
 import { generateSlug } from "random-word-slugs";
+import JSConfetti from "js-confetti";
 
 const categories = ["animals", "food", "transportation", "sports", "place"];
 
@@ -38,6 +39,7 @@ export default function GamePage() {
   const [showHint, setShowHint] = useState(false);
 
   const wordSet = new Set(word.toUpperCase());
+  const jsConfetti = new JSConfetti();
 
   function newGame() {
     setShowHint(false);
@@ -73,6 +75,9 @@ export default function GamePage() {
           const newGuessedLetters = new Set(prevGuessedLetters).add(upperKey);
           if (newGuessedLetters.size === wordSet.size) {
             setGameStatus("won");
+            jsConfetti.addConfetti({
+              emojis: ["🏆", "⭐", "🎉", "🎊", "🌟", "✨"],
+            });
           }
           return newGuessedLetters;
         });
@@ -83,6 +88,9 @@ export default function GamePage() {
           if (newAttempts < 1) {
             setGameStatus("gameOver");
             setGuessedLetters(wordSet);
+            jsConfetti.addConfetti({
+              emojis: ["😢", "💔", "😭", "🤦", "😫", "💀"],
+            });
           }
           return newAttempts;
         });
