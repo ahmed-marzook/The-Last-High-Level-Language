@@ -69,6 +69,7 @@ export default function GamePage() {
           const newAttempts = remainingAttempts - 1;
           if (newAttempts < 1) {
             setGameStatus("gameOver");
+            setGuessedLetters(wordSet);
           }
           return newAttempts;
         });
