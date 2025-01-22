@@ -37,8 +37,8 @@ export default function GamePage() {
     );
   };
 
-  function keyPressed(key) {
-    const upperKey = key.toUpperCase();
+  function keyPressed(letter) {
+    const upperKey = letter.toUpperCase();
 
     setKeyboard((prevKeyboard) => {
       if (wordSet.has(upperKey)) {
@@ -49,7 +49,7 @@ export default function GamePage() {
           }
           return newGuessedLetters;
         });
-        return updateKeyboard(prevKeyboard, key, "correct");
+        return updateKeyboard(prevKeyboard, letter, "correct");
       } else {
         setRemainingAttempts(() => {
           const newAttempts = remainingAttempts - 1;
@@ -58,7 +58,7 @@ export default function GamePage() {
           }
           return newAttempts;
         });
-        return updateKeyboard(prevKeyboard, key, "incorrect");
+        return updateKeyboard(prevKeyboard, letter, "incorrect");
       }
     });
   }

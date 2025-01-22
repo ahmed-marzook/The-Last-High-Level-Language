@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
+import "./KeyboardKey.css";
 
 const KeyboardKey = (props) => {
   const statusClass = {
