@@ -16,7 +16,7 @@ function LivesDisplay({ attemptsLeft, gameStatus }) {
       case "gameOver":
         return {
           message:
-            "Game over! All languages reduced to Assembly. Better start learning Assembly",
+            "GAME OVER! All languages reduced to Assembly. Better start learning Assembly",
           backgroundColor: "#F44336",
           textColor: "#FFFFFF",
         };
