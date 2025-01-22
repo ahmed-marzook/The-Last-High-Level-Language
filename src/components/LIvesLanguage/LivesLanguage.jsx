@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "./LivesLanguage.css";
+import { memo } from "react";
 
 function LivesLanguage(props) {
   const className = `lives-display__language ${
@@ -18,4 +19,4 @@ function LivesLanguage(props) {
 
 LivesLanguage.propTypes = {};
 
-export default LivesLanguage;
+export default memo(LivesLanguage);

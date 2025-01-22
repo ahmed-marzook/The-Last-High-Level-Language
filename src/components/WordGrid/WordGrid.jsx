@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import "./WordGrid.css";
 import Letter from "../Letter/Letter";
-import { nanoid } from "nanoid";
 
 function WordGrid(props) {
   const isGuessedLetter = (letter) => {
@@ -10,9 +9,9 @@ function WordGrid(props) {
 
   return (
     <section className="word-grid">
-      {props.word.split("").map((letter) => (
+      {props.word.split("").map((letter, index) => (
         <Letter
-          key={nanoid()}
+          key={index}
           letter={letter.toUpperCase()}
           isGuessed={isGuessedLetter(letter)}
         />
