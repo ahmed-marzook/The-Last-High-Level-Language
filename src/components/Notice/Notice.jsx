@@ -1,8 +1,10 @@
-import React from "react";
 import PropTypes from "prop-types";
 import "./Notice.css";
 
 function Notice(props) {
+  const getMessage = () => {
+    return <>&quot;{props.message}&quot;</>;
+  };
   return (
     <>
       {props.message && (
@@ -14,7 +16,7 @@ function Notice(props) {
               color: props.textColor,
             }}
           >
-            &quot;{props.message}&quot;
+            {getMessage()}
           </div>
         </section>
       )}
@@ -22,6 +24,10 @@ function Notice(props) {
   );
 }
 
-Notice.propTypes = {};
+Notice.propTypes = {
+  message: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string.isRequired,
+  textColor: PropTypes.string.isRequired,
+};
 
 export default Notice;

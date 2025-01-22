@@ -4,7 +4,7 @@ import languageLives from "../../data/languageLives";
 import LivesLanguage from "../LivesLanguage/LivesLanguage";
 import Notice from "../Notice/Notice";
 
-function LivesDisplay({ attemptsLeft }) {
+function LivesDisplay({ attemptsLeft, gameStatus }) {
   function getMessage() {
     // If we have all attempts (8), return empty string
     if (attemptsLeft + 1 > 8) {
@@ -31,6 +31,7 @@ function LivesDisplay({ attemptsLeft }) {
         message={getMessage().message}
         backgroundColor={getMessage().backgroundColor}
         textColor={getMessage().textColor}
+        gameStatus={gameStatus}
       />
       <section className="lives-display">
         {languageLives.map((life) => (

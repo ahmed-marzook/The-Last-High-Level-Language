@@ -35,13 +35,25 @@ export default function GamePage() {
         return updateKeyboard(prevKeyboard, key, "incorrect");
       }
     });
+    if (remainingAttempts < 1) {
+      console.log("YOU LOSE");
+      setGameStatus("gameOver");
+    }
   }
   return (
     <div className="game-content">
       <Header />
-      <LivesDisplay attemptsLeft={remainingAttempts} />
-      <WordGrid word={word} guessedLetters={guessedLetters} />
-      <Keyboard keyboardLayout={keyboard} onKeyPressed={keyPressed} />
+      <LivesDisplay attemptsLeft={remainingAttempts} gameStatus={gameStatus} />
+      <WordGrid
+        word={word}
+        guessedLetters={guessedLetters}
+        gameStatus={gameStatus}
+      />
+      <Keyboard
+        keyboardLayout={keyboard}
+        onKeyPressed={keyPressed}
+        gameStatus={gameStatus}
+      />
       <Footer />
     </div>
   );
