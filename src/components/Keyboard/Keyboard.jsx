@@ -13,6 +13,7 @@ function Keyboard(props) {
               key={keyData.key}
               letter={keyData.key}
               status={keyData.status}
+              onKeyPressed={props.onKeyPressed}
             />
           ))}
         </div>

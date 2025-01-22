@@ -5,14 +5,38 @@ import LivesDisplay from "../components/LivesDisplay/LivesDisplay";
 import WordGrid from "../components/WordGrid/WordGrid";
 import "./GamePage.css";
 import { keyboardLayout } from "../data/keyboardLayout";
+import { useState } from "react";
 
 export default function GamePage() {
+  const [keyboard, setKeyboard] = useState(keyboardLayout);
+
+  const [word, setWord] = useState("PINEAPPlE");
+  const [guessedLetters, setGuessedLetters] = useState(
+    new Set(["P", "N", "A", "L", "I", "E"])
+  );
+  const [remainingAttempts, setRemainingAttempts] = useState(8);
+  const [gameStatus, setGameStatus] = useState("playing");
+
+  const updateKeyboard = (layout, targetKey, newStatus) => {
+    return layout.map((row) =>
+      row.map((key) =>
+        key.key === targetKey ? { ...key, status: newStatus } : key
+      )
+    );
+  };
+
+  function keyPressed(key) {
+    console.log(key);
+    setKeyboard((prevKeyboard) =>
+      updateKeyboard(prevKeyboard, key, "incorrect")
+    );
+  }
   return (
     <div className="game-content">
       <Header />
-      <LivesDisplay attemptsLeft={0} />
-      <WordGrid word={"PINEAPPlE"} />
-      <Keyboard keyboardLayout={keyboardLayout} />
+      <LivesDisplay attemptsLeft={remainingAttempts} />
+      <WordGrid word={word} guessedLetters={guessedLetters} />
+      <Keyboard keyboardLayout={keyboard} onKeyPressed={keyPressed} />
       <Footer />
     </div>
   );

@@ -4,15 +4,27 @@ import Letter from "../Letter/Letter";
 import { nanoid } from "nanoid";
 
 function WordGrid(props) {
+  const isGuessedLetter = (letter) => {
+    console.log(props.guessedLetters.size);
+    return props.guessedLetters.has(letter.toUpperCase());
+  };
+
   return (
     <section className="word-grid">
       {props.word.split("").map((letter) => (
-        <Letter key={nanoid()} letter={letter.toUpperCase()} isGuessed={true} />
+        <Letter
+          key={nanoid()}
+          letter={letter.toUpperCase()}
+          isGuessed={isGuessedLetter(letter)}
+        />
       ))}
     </section>
   );
 }
 
-WordGrid.propTypes = {};
+WordGrid.propTypes = {
+  word: PropTypes.string.isRequired,
+  guessedLetters: PropTypes.instanceOf(Set).isRequired,
+};
 
 export default WordGrid;

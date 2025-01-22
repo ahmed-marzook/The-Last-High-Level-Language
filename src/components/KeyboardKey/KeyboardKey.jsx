@@ -1,22 +1,29 @@
-import React from "react";
 import PropTypes from "prop-types";
 
-function KeyboardKey(props) {
-  const getKeyClass = () => {
-    switch (props.status) {
-      case "correct":
-        return "correct";
-      case "incorrect":
-        return "wrong";
-      case "unused":
-      default:
-        return "";
-    }
-  };
+const KeyboardKey = (props) => {
+  const statusClass = {
+    correct: "correct",
+    incorrect: "incorrect",
+    unused: "",
+  }[props.status || "unused"];
 
-  return <button className={"key " + getKeyClass()}>{props.letter}</button>;
-}
+  const isDisabled = props.status === "correct" || props.status === "incorrect";
 
-KeyboardKey.propTypes = {};
+  return (
+    <button
+      disabled={isDisabled}
+      onClick={() => props.onKeyPressed(props.letter)}
+      className={`key ${statusClass}`}
+    >
+      {props.letter}
+    </button>
+  );
+};
+
+KeyboardKey.propTypes = {
+  letter: PropTypes.string.isRequired,
+  status: PropTypes.oneOf(["correct", "incorrect", "unused"]),
+  onKeyPressed: PropTypes.func.isRequired,
+};
 
 export default KeyboardKey;

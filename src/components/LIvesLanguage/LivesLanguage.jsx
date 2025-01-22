@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import "./LivesLanguage.css";
 
 function LivesLanguage(props) {
-  console.log(props.eliminated + " " + props.language);
   const className = `lives-display__language ${
     props.isEliminated ? "eliminated" : ""
   }`;
