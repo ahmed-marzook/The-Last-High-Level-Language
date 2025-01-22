@@ -10,7 +10,7 @@ export default function GamePage() {
   return (
     <div className="game-content">
       <Header />
-      <LivesDisplay attemptsLeft={8} />
+      <LivesDisplay attemptsLeft={0} />
       <UserAnswers />
       <Keyboard keyboardLayout={keyboardLayout} />
       <Footer />

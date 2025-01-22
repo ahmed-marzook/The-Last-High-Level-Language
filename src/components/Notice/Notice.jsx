@@ -4,9 +4,21 @@ import "./Notice.css";
 
 function Notice(props) {
   return (
-    <section>
-      <div className="game-notice">&quot;Farewell HTML & CSS&quot;🫡</div>
-    </section>
+    <>
+      {props.message && (
+        <section>
+          <div
+            className="game-notice"
+            style={{
+              backgroundColor: props.backgroundColor,
+              color: props.textColor,
+            }}
+          >
+            &quot;{props.message}&quot;
+          </div>
+        </section>
+      )}
+    </>
   );
 }
 

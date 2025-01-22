@@ -4,10 +4,34 @@ import languageLives from "../../data/languageLives";
 import LivesLanguage from "../LIvesLanguage/LivesLanguage";
 import Notice from "../Notice/Notice";
 
-function LivesDisplay(props) {
+function LivesDisplay({ attemptsLeft }) {
+  function getMessage() {
+    // If we have all attempts (8), return empty string
+    if (attemptsLeft + 1 > 8) {
+      return "";
+    }
+
+    // Find the first language that matches our current attempts count
+    const language = languageLives.find(
+      (lang) => lang.attempts === attemptsLeft + 1
+    );
+
+    // If we found a matching language, return its message
+    if (language) {
+      return language;
+    }
+
+    // If no matching language found (shouldn't happen with your data)
+    return "";
+  }
+
   return (
     <>
-      <Notice />
+      <Notice
+        message={getMessage().message}
+        backgroundColor={getMessage().backgroundColor}
+        textColor={getMessage().textColor}
+      />
       <section className="lives-display">
         {languageLives.map((life) => (
           <LivesLanguage
@@ -15,7 +39,7 @@ function LivesDisplay(props) {
             backgroundColor={life.backgroundColor}
             textColor={life.textColor}
             language={life.language}
-            isEliminated={life.attempts > props.attemptsLeft}
+            isEliminated={life.attempts > attemptsLeft}
           />
         ))}
       </section>
