@@ -8,19 +8,28 @@ import { keyboardLayout } from "../data/keyboardLayout";
 import { useState } from "react";
 import { generateSlug } from "random-word-slugs";
 
-const options = {
+const categories = ["animals", "food", "transportation", "sports", "place"];
+
+const getRandomCategory = () => {
+  const randomIndex = Math.floor(Math.random() * categories.length);
+  return categories[randomIndex];
+};
+
+let hint = getRandomCategory();
+
+const getOptions = () => ({
   format: "camel",
   partsOfSpeech: ["noun"],
   categories: {
-    noun: ["animals", "food", "transportation", "sports", "place"],
+    noun: [hint],
   },
-};
+});
 
 export default function GamePage() {
   const [keyboard, setKeyboard] = useState(keyboardLayout);
 
   const [word, setWord] = useState(() =>
-    generateSlug(1, options).toUpperCase()
+    generateSlug(1, getOptions()).toUpperCase()
   );
   // const [word, setWord] = useState("ORANGE");
   const [guessedLetters, setGuessedLetters] = useState(new Set([]));
@@ -30,7 +39,8 @@ export default function GamePage() {
   const wordSet = new Set(word.toUpperCase());
 
   function newGame() {
-    setWord(generateSlug(1, options).toUpperCase());
+    hint = getRandomCategory();
+    setWord(generateSlug(1, getOptions()).toUpperCase());
     setKeyboard(keyboardLayout);
     setGuessedLetters(new Set([]));
     setRemainingAttempts(8);
@@ -47,7 +57,8 @@ export default function GamePage() {
 
   function keyPressed(letter) {
     if (letter === "HINT") {
-      console.log("HINT");
+      console.log(hint);
+      return;
     } else if (letter === "⟳") {
       return newGame();
     }
