@@ -1,7 +1,7 @@
 import "./LivesDisplay.css";
 import PropTypes from "prop-types";
 import languageLives from "../../data/languageLives";
-import LivesLanguage from "../LIvesLanguage/LivesLanguage";
+import LivesLanguage from "../LivesLanguage/LivesLanguage";
 import Notice from "../Notice/Notice";
 
 function LivesDisplay({ attemptsLeft }) {
