@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { memo } from "react";
 
 function Letter(props) {
   return (
@@ -11,4 +12,4 @@ Letter.propTypes = {
   isGuessed: PropTypes.bool.isRequired,
 };
 
-export default Letter;
+export default memo(Letter);

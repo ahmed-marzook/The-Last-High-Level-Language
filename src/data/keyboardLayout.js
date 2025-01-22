@@ -4,7 +4,7 @@ export const keyboardLayout = [
         { key: 'W', isInWord: false, status: 'unused' },
         { key: 'E', isInWord: false, status: 'unused' },
         { key: 'R', isInWord: false, status: 'unused' },
-        { key: 'T', isInWord: true, status: 'correct' },
+        { key: 'T', isInWord: false, status: 'unused' },
         { key: 'Y', isInWord: false, status: 'unused' },
         { key: 'U', isInWord: false, status: 'unused' },
         { key: 'I', isInWord: false, status: 'unused' },
@@ -12,7 +12,7 @@ export const keyboardLayout = [
         { key: 'P', isInWord: false, status: 'unused' },
     ],
     [
-        { key: 'A', isInWord: false, status: 'incorrect' },
+        { key: 'A', isInWord: false, status: 'unused' },
         { key: 'S', isInWord: false, status: 'unused' },
         { key: 'D', isInWord: false, status: 'unused' },
         { key: 'F', isInWord: false, status: 'unused' },
@@ -25,7 +25,7 @@ export const keyboardLayout = [
     [
         { key: 'Z', isInWord: false, status: 'unused' },
         { key: 'X', isInWord: false, status: 'unused' },
-        { key: 'C', isInWord: true, status: 'correct' },
+        { key: 'C', isInWord: false, status: 'unused' },
         { key: 'V', isInWord: false, status: 'unused' },
         { key: 'B', isInWord: false, status: 'unused' },
         { key: 'N', isInWord: false, status: 'unused' },

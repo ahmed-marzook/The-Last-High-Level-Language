@@ -5,7 +5,6 @@ import { nanoid } from "nanoid";
 
 function WordGrid(props) {
   const isGuessedLetter = (letter) => {
-    console.log(props.guessedLetters.size);
     return props.guessedLetters.has(letter.toUpperCase());
   };
 

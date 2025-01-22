@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { memo } from "react";
 
 const KeyboardKey = (props) => {
   const statusClass = {
@@ -26,4 +27,4 @@ KeyboardKey.propTypes = {
   onKeyPressed: PropTypes.func.isRequired,
 };
 
-export default KeyboardKey;
+export default memo(KeyboardKey);

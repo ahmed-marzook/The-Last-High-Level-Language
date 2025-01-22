@@ -10,12 +10,12 @@ import { useState } from "react";
 export default function GamePage() {
   const [keyboard, setKeyboard] = useState(keyboardLayout);
 
-  const [word, setWord] = useState("PINEAPPlE");
-  const [guessedLetters, setGuessedLetters] = useState(
-    new Set(["P", "N", "A", "L", "I", "E"])
-  );
+  const [word, setWord] = useState("ORANGE");
+  const [guessedLetters, setGuessedLetters] = useState(new Set([]));
   const [remainingAttempts, setRemainingAttempts] = useState(8);
   const [gameStatus, setGameStatus] = useState("playing");
+
+  const wordSet = new Set(word.toUpperCase());
 
   const updateKeyboard = (layout, targetKey, newStatus) => {
     return layout.map((row) =>
@@ -26,10 +26,15 @@ export default function GamePage() {
   };
 
   function keyPressed(key) {
-    console.log(key);
-    setKeyboard((prevKeyboard) =>
-      updateKeyboard(prevKeyboard, key, "incorrect")
-    );
+    setKeyboard((prevKeyboard) => {
+      if (wordSet.has(key.toUpperCase())) {
+        setGuessedLetters((prev) => prev.add(key));
+        return updateKeyboard(prevKeyboard, key, "correct");
+      } else {
+        setRemainingAttempts(remainingAttempts - 1);
+        return updateKeyboard(prevKeyboard, key, "incorrect");
+      }
+    });
   }
   return (
     <div className="game-content">
