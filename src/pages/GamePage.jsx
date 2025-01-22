@@ -12,7 +12,7 @@ const options = {
   format: "camel",
   partsOfSpeech: ["noun"],
   categories: {
-    noun: ["animals"],
+    noun: ["animals", "food", "transportation", "sports", "place"],
   },
 };
 
