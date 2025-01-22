@@ -1,18 +1,25 @@
 import "./LivesDisplay.css";
 import PropTypes from "prop-types";
+import languageLives from "../../data/languageLives";
+import LivesLanguage from "../LIvesLanguage/LivesLanguage";
+import Notice from "../Notice/Notice";
 
 function LivesDisplay(props) {
   return (
-    <section className="lives-display">
-      <div className="lives-display__language eliminated">Python</div>
-      <div className="lives-display__language">JavaScript</div>
-      <div className="lives-display__language eliminated">Java</div>
-      <div className="lives-display__language">C++</div>
-      <div className="lives-display__language eliminated">Ruby</div>
-      <div className="lives-display__language eliminated">C#</div>
-      <div className="lives-display__language">C</div>
-      <div className="lives-display__language">Assembly</div>
-    </section>
+    <>
+      <Notice />
+      <section className="lives-display">
+        {languageLives.map((life) => (
+          <LivesLanguage
+            key={life.attempts}
+            backgroundColor={life.backgroundColor}
+            textColor={life.textColor}
+            language={life.language}
+            isEliminated={life.attempts > props.attemptsLeft}
+          />
+        ))}
+      </section>
+    </>
   );
 }
 
