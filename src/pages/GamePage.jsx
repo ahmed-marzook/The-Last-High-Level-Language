@@ -5,8 +5,9 @@ import LivesDisplay from "../components/LivesDisplay/LivesDisplay";
 import WordGrid from "../components/WordGrid/WordGrid";
 import "./GamePage.css";
 import { keyboardLayout } from "../data/keyboardLayout";
+import { updateKeyboardLayout } from "../utility/updateKeyboardLayout";
 import { useState } from "react";
-import { generateSlug } from "random-word-slugs";
+import { generateWord } from "../utility/wordGenerator";
 import JSConfetti from "js-confetti";
 
 const CATEGORIES = ["animals", "food", "transportation", "sports", "place"];
@@ -19,25 +20,6 @@ const GAME_STATES = {
 
 const getRandomCategory = () =>
   CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
-
-const generateWord = (category) => {
-  const options = {
-    format: "camel",
-    partsOfSpeech: ["noun"],
-    categories: {
-      noun: [category],
-    },
-  };
-  return generateSlug(1, options).toUpperCase();
-};
-
-const updateKeyboardLayout = (layout, targetKey, newStatus) => {
-  return layout.map((row) =>
-    row.map((key) =>
-      key.key === targetKey ? { ...key, status: newStatus } : key
-    )
-  );
-};
 
 export default function GamePage() {
   const [keyboard, setKeyboard] = useState(keyboardLayout);
@@ -89,7 +71,7 @@ export default function GamePage() {
         });
         return updateKeyboardLayout(prevKeyboard, letter, "correct");
       } else {
-        setRemainingAttempts((prev) => {
+        setRemainingAttempts(() => {
           const newAttempts = remainingAttempts - 1;
           if (newAttempts < 1) {
             handleGameOver();
