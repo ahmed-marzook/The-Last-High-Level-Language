@@ -7,7 +7,6 @@ Project from [Scrimba Learn React Cource](https://scrimba.com/learn-react-c0e)
 ## Features
 
 - 🎯 8 attempts to save the programming world
-- 💻 Programming-themed word bank
 - 🌍 Progressive language elimination system
 - 🎮 Interactive keyboard interface
 - 📱 Responsive design for all devices
@@ -38,35 +37,6 @@ npm install
 
 ```bash
 npm run dev
-```
-
-## Customization
-
-### Adding New Words
-
-Modify the `WORDS` array in the main component:
-
-```javascript
-const WORDS = [
-  "PROGRAMMING",
-  "JAVASCRIPT",
-  // Add more words here
-];
-```
-
-### Modifying Language Elimination Sequence
-
-Update the `LANGUAGE_ELIMINATIONS` array to change the order or add new languages:
-
-```javascript
-const LANGUAGE_ELIMINATIONS = [
-  {
-    attempts: 7,
-    message: "⚠️ [Language] has been eliminated...",
-    language: "[Language]",
-  },
-  // Add more eliminations
-];
 ```
 
 ## Contributing
