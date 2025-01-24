@@ -9,95 +9,111 @@ import { useState } from "react";
 import { generateSlug } from "random-word-slugs";
 import JSConfetti from "js-confetti";
 
-const categories = ["animals", "food", "transportation", "sports", "place"];
-
-const getRandomCategory = () => {
-  const randomIndex = Math.floor(Math.random() * categories.length);
-  return categories[randomIndex];
+const CATEGORIES = ["animals", "food", "transportation", "sports", "place"];
+const INITIAL_ATTEMPTS = 8;
+const GAME_STATES = {
+  PLAYING: "playing",
+  WON: "won",
+  GAME_OVER: "gameOver",
 };
 
-let hint = getRandomCategory();
+const getRandomCategory = () =>
+  CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
 
-const getOptions = () => ({
-  format: "camel",
-  partsOfSpeech: ["noun"],
-  categories: {
-    noun: [hint],
-  },
-});
+const generateWord = (category) => {
+  const options = {
+    format: "camel",
+    partsOfSpeech: ["noun"],
+    categories: {
+      noun: [category],
+    },
+  };
+  return generateSlug(1, options).toUpperCase();
+};
+
+const updateKeyboardLayout = (layout, targetKey, newStatus) => {
+  return layout.map((row) =>
+    row.map((key) =>
+      key.key === targetKey ? { ...key, status: newStatus } : key
+    )
+  );
+};
 
 export default function GamePage() {
   const [keyboard, setKeyboard] = useState(keyboardLayout);
-
-  const [word, setWord] = useState(() =>
-    generateSlug(1, getOptions()).toUpperCase()
-  );
-  // const [word, setWord] = useState("ORANGE");
+  const [category, setCategory] = useState(getRandomCategory());
+  const [word, setWord] = useState(() => generateWord(category));
   const [guessedLetters, setGuessedLetters] = useState(new Set([]));
-  const [remainingAttempts, setRemainingAttempts] = useState(8);
+  const [remainingAttempts, setRemainingAttempts] = useState(INITIAL_ATTEMPTS);
   const [gameStatus, setGameStatus] = useState("playing");
   const [showHint, setShowHint] = useState(false);
 
   const wordSet = new Set(word.toUpperCase());
   const jsConfetti = new JSConfetti();
 
-  function newGame() {
+  const newGame = () => {
+    const newCategory = getRandomCategory();
+    setCategory(newCategory);
     setShowHint(false);
-    hint = getRandomCategory();
-    setWord(generateSlug(1, getOptions()).toUpperCase());
+    setWord(generateWord(newCategory));
     setKeyboard(keyboardLayout);
-    setGuessedLetters(new Set([]));
-    setRemainingAttempts(8);
-    setGameStatus("playing");
-  }
-
-  const updateKeyboard = (layout, targetKey, newStatus) => {
-    return layout.map((row) =>
-      row.map((key) =>
-        key.key === targetKey ? { ...key, status: newStatus } : key
-      )
-    );
+    setGuessedLetters(new Set());
+    setRemainingAttempts(INITIAL_ATTEMPTS);
+    setGameStatus(GAME_STATES.PLAYING);
   };
 
-  function keyPressed(letter) {
-    if (letter === "HINT") {
-      setShowHint((prev) => !prev);
-      return;
-    } else if (letter === "⟳") {
-      return newGame();
-    }
+  const handleGameWon = () => {
+    setGameStatus(GAME_STATES.WON);
+    jsConfetti.addConfetti({
+      emojis: ["🏆", "⭐", "🎉", "🎊", "🌟", "✨"],
+    });
+  };
 
-    const upperKey = letter.toUpperCase();
+  const handleGameOver = () => {
+    setGameStatus(GAME_STATES.GAME_OVER);
+    setGuessedLetters(wordSet);
+    jsConfetti.addConfetti({
+      emojis: ["😢", "💔", "😭", "🤦", "😫", "💀"],
+    });
+  };
 
+  const handleLetterGuess = (letter) => {
     setKeyboard((prevKeyboard) => {
-      if (wordSet.has(upperKey)) {
-        setGuessedLetters((prevGuessedLetters) => {
-          const newGuessedLetters = new Set(prevGuessedLetters).add(upperKey);
-          if (newGuessedLetters.size === wordSet.size) {
-            setGameStatus("won");
-            jsConfetti.addConfetti({
-              emojis: ["🏆", "⭐", "🎉", "🎊", "🌟", "✨"],
-            });
+      if (wordSet.has(letter)) {
+        setGuessedLetters((prev) => {
+          const newGuessed = new Set(prev).add(letter);
+          if (newGuessed.size === wordSet.size) {
+            handleGameWon();
           }
-          return newGuessedLetters;
+          return newGuessed;
         });
-        return updateKeyboard(prevKeyboard, letter, "correct");
+        return updateKeyboardLayout(prevKeyboard, letter, "correct");
       } else {
-        setRemainingAttempts(() => {
+        setRemainingAttempts((prev) => {
           const newAttempts = remainingAttempts - 1;
           if (newAttempts < 1) {
-            setGameStatus("gameOver");
-            setGuessedLetters(wordSet);
-            jsConfetti.addConfetti({
-              emojis: ["😢", "💔", "😭", "🤦", "😫", "💀"],
-            });
+            handleGameOver();
           }
           return newAttempts;
         });
-        return updateKeyboard(prevKeyboard, letter, "incorrect");
+        return updateKeyboardLayout(prevKeyboard, letter, "incorrect");
       }
     });
-  }
+  };
+
+  const handleKeyPress = (key) => {
+    switch (key) {
+      case "HINT":
+        setShowHint((prev) => !prev);
+        break;
+      case "⟳":
+        newGame();
+        break;
+      default:
+        handleLetterGuess(key.toUpperCase());
+    }
+  };
+
   return (
     <div className="game-content">
       <Header />
@@ -110,13 +126,13 @@ export default function GamePage() {
       {showHint && (
         <div className="hint-container">
           <p className="hint-text">
-            Category: <span className="hint-category">{hint}</span>
+            Category: <span className="hint-category">{category}</span>
           </p>
         </div>
       )}
       <Keyboard
         keyboardLayout={keyboard}
-        onKeyPressed={keyPressed}
+        onKeyPressed={handleKeyPress}
         gameStatus={gameStatus}
       />
       <Footer />
