@@ -7,7 +7,7 @@
   font-size: 0.8rem;
   position: relative;
 }
-
+/*
 .lives-display__language.eliminated::after {
   content: "💀";
   align-content: center;
@@ -17,12 +17,11 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  /* Split into two pseudo-elements */
-  z-index: 2; /* Place content above the background */
+  z-index: 2;
   font-size: 0.8rem;
 }
-
-/* Add new pseudo-element for background */
+*/
+/*
 .lives-display__language.eliminated::before {
   content: "";
   position: absolute;
@@ -33,5 +32,20 @@
   background: black;
   opacity: 0.85;
   border-radius: 3px;
-  z-index: 1; /* Place background below the content */
+  z-index: 1;
+}
+*/
+.lives-display__language.eliminated::before {
+  content: "💀";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 0.85rem;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 3.5px;
 }
